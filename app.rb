@@ -11,44 +11,68 @@ get("/") do
   erb(:index)
 end
 
-#rock route
-get("/rock") do
+#dynamic route
+get("/:dynamic") do
+  @user_option = params.fetch("dynamic")
   options = ["rock", "paper", "scissors"]
-  @option = options.sample
-    if @option == "paper"
+  @computer_option = options.sample
+    if @user_option == "rock" and @computer_option == "paper"
       @result = "lost"
-    elsif @option == "scissors"
+    elsif @user_option == "rock" and @computer_option == "scissors"
+      @result = "won"
+    elsif @user_option == "paper" and @computer_option == "scissors"
+      @result = "lost"
+    elsif @user_option == "paper" and @computer_option == "rock"
+      @result = "won"
+    elsif @user_option == "scissors" and @computer_option == "rock"
+      @result = "lost"
+    elsif @user_option == "scissors" and @computer_option == "paper"
       @result = "won"
     else
       @result = "tied"
     end
-  erb(:rock)
+
+    erb(:flexible)
 end
 
-#paper route
-get("/paper") do
-  options = ["rock", "paper", "scissors"]
-  @option = options.sample
-    if @option == "scissors"
-      @result = "lost"
-    elsif @option == "rock"
-      @result = "won"
-    else
-      @result = "tied"
-    end
-  erb(:paper)
-end
+# #rock route
+# get("/rock") do
+#   options = ["rock", "paper", "scissors"]
+#   @option = options.sample
+#     if @option == "paper"
+#       @result = "lost"
+#     elsif @option == "scissors"
+#       @result = "won"
+#     else
+#       @result = "tied"
+#     end
+#   erb(:rock)
+# end
 
-#scissors route
-get("/scissors") do
-  options = ["rock", "paper", "scissors"]
-  @option = options.sample
-    if @option == "rock"
-      @result = "lost"
-    elsif @option == "paper"
-      @result = "won"
-    else
-      @result = "tied"
-    end
-  erb(:scissors)
-end
+# #paper route
+# get("/paper") do
+#   options = ["rock", "paper", "scissors"]
+#   @option = options.sample
+#     if @option == "scissors"
+#       @result = "lost"
+#     elsif @option == "rock"
+#       @result = "won"
+#     else
+#       @result = "tied"
+#     end
+#   erb(:paper)
+# end
+
+# #scissors route
+# get("/scissors") do
+#   options = ["rock", "paper", "scissors"]
+#   @option = options.sample
+#     if @option == "rock"
+#       @result = "lost"
+#     elsif @option == "paper"
+#       @result = "won"
+#     else
+#       @result = "tied"
+#     end
+#   erb(:scissors)
+# end
